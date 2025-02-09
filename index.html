@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Fernanda ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        #heart {
+            font-size: 50px;
+            color: red;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💖 Un detalle especial 💖</h1>
+        <button onclick="mostrarCorazon()">Presiona aquí</button>
+        <h2 id="heart">❤️ Fernanda Alarcón ❤️</h2>
+    </div>
+    <script>
+        function mostrarCorazon() {
+            document.getElementById('heart').style.opacity = "1";
+        }
+    </script>
+</body>
+</html>
