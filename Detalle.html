@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para ti 🌸</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      white-space: nowrap;
+      border-right: 3px solid white;
+      overflow: hidden;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 20px;
+      background: #ff4d6d;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 2;
+    }
+    button:hover {
+      background: #ff6f91;
+      transform: scale(1.05);
+    }
+    .flowers {
+      position: absolute;
+      top: -50px;
+      font-size: 2rem;
+      animation: fall 8s linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* Pantalla flotante */
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      text-align: center;
+    }
+
+    /* Ramo */
+    #ramo {
+      width: 300px;
+    }
+
+    /* Texto debajo del ramo */
+    #dedicatoria {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      opacity: 0;
+      animation: appear 2s forwards;
+      animation-delay: 4s; /* aparece después de que se dibuje el ramo */
+    }
+
+    /* Animación de dibujo */
+    .draw {
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      animation: draw 3s forwards;
+    }
+    .fill {
+      opacity: 0;
+      animation: appear 2s forwards;
+      animation-delay: 3s;
+    }
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes appear {
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="mensaje"></h1>
+  <button onclick="sorpresa()">💐 Toca aquí para recibir tu detalle 💐</button>
+  
+  <!-- Pantalla flotante -->
+  <div id="overlay">
+    <svg id="ramo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Tallos -->
+      <line x1="100" y1="200" x2="80" y2="100" stroke="green" stroke-width="6" class="draw"/>
+      <line x1="100" y1="200" x2="120" y2="100" stroke="green" stroke-width="6" class="draw" style="animation-delay:0.5s"/>
+      <line x1="100" y1="200" x2="100" y2="90" stroke="green" stroke-width="6" class="draw" style="animation-delay:1s"/>
+      
+      <!-- Flores tipo crisantemo -->
+      <circle cx="80" cy="90" r="20" stroke="orange" stroke-width="2" fill="gold" class="fill"/>
+      <circle cx="120" cy="90" r="20" stroke="orange" stroke-width="2" fill="gold" class="fill"/>
+      <circle cx="100" cy="70" r="20" stroke="orange" stroke-width="2" fill="gold" class="fill"/>
+
+      <!-- Centros -->
+      <circle cx="80" cy="90" r="6" fill="brown" class="fill"/>
+      <circle cx="120" cy="90" r="6" fill="brown" class="fill"/>
+      <circle cx="100" cy="70" r="6" fill="brown" class="fill"/>
+    </svg>
+
+    <!-- Dedicatoria -->
+    <div id="dedicatoria">Para ti, Elizabeth V.</div>
+  </div>
+
+  <script>
+    // Efecto máquina de escribir
+    const texto = "Aunque esté lejos, hoy te regalo un ramo de crisantemos 🌼💕";
+    let i = 0;
+    function escribir() {
+      if (i < texto.length) {
+        document.getElementById("mensaje").innerHTML += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 100);
+      }
+    }
+    escribir();
+
+    // Mostrar overlay y animar ramo
+    function sorpresa() {
+      const overlay = document.getElementById("overlay");
+      overlay.style.display = "flex";
+    }
+
+    // Flores cayendo
+    setInterval(() => {
+      const flor = document.createElement("div");
+      flor.classList.add("flowers");
+      flor.innerHTML = "🌸";
+      flor.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(flor);
+      setTimeout(() => { flor.remove(); }, 8000);
+    }, 500);
+  </script>
+</body>
+</html>
